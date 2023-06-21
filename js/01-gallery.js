@@ -37,27 +37,29 @@ ulGallery.addEventListener("click", onGallaryClick);
 
 function onGallaryClick(event) {
   event.preventDefault();
-  const card = event.target.closest(".gallery__image");
-  // console.log(card);
-  if (!card) {
+
+  console.log(event.target.dataset);
+  if (!event.target.classList.contains("gallery__image")) {
     return;
-  } else {
-    const data = findCard(card);
-    const instance = basicLightbox.create(creatModalMarkUp(data));
-    instance.show();
   }
-}
+  const { source } = event.target.dataset;
 
-function findCard(card) {
-  const { source } = card.dataset;
-  const currentCard = galleryItems.find(({ original }) => original === source);
+  const instance = basicLightbox.create(
+    `<div>
+   <img src="${source}"
+    />
+   </div >`,
+    {
+      onShow: (instance) => window.addEventListener("keydown", onEscPress),
+      onClose: (instance) => window.removeEventListener("keydown", onEscPress),
+    }
+  );
+  instance.show();
 
-  return currentCard;
-}
-
-function creatModalMarkUp({ original, description }) {
-  return `<div>
-  <img src="${original}"
-   alt = "${description}"/>
-  </div >`;
+  function onEscPress(event) {
+    if (event.code === "Escape") {
+      instance.close(() => console.log("lightbox not visible anymore"));
+      console.log(event.code);
+    }
+  }
 }
