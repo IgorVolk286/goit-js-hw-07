@@ -26,17 +26,16 @@ function createMarckup(arr) {
 ulGallery.insertAdjacentHTML("beforeend", createMarckup(galleryItems));
 // console.log(createMarckup(gtalleryItems));
 
-ulGallery.addEventListener("click", onGallaryClick);
+// ulGallery.addEventListener("click", onGallaryClick);
 
-function onGallaryClick(event) {
-  event.preventDefault();
+// function onGallaryClick(event) {
+//   event.preventDefault();
 
-  console.log(event.target.dataset);
-  if (!event.target.classList.contains("gallery__image")) {
-    return;
-  }
-  let gallery = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionDelay: 250,
-  });
-}
+//   console.log(event.target.dataset);
+//   if (!event.target.classList.contains("gallery__image")) {
+//     return;
+//   }
+let gallery = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
