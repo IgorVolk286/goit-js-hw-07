@@ -45,10 +45,10 @@ function onGallaryClick(event) {
   const { source } = event.target.dataset;
 
   const instance = basicLightbox.create(
-    `<div>
+    `
    <img src="${source}"
     />
-   </div >`,
+   `,
     {
       onShow: (instance) => window.addEventListener("keydown", onEscPress),
       onClose: (instance) => window.removeEventListener("keydown", onEscPress),
